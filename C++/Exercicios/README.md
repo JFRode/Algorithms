@@ -10,5 +10,3 @@ Repositório para armazenamento de listas de exercicios resolvidas.
 - Laços de Repetição
 - Vetores
 - Matrizes
-=======
-Exercícios e Logica em algoritmos
