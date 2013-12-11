@@ -7,12 +7,10 @@ Para usar um comando no programa é nescessário usar a função system("comando
 
 Parar o serviço do programa LogMeIn Hamachi:
 
-#include <iostream>
 
-using namespace std;
-int main()
-{
+
     int r;
+    
     cout << "Certifique-se de ter iniciado o programa como ADMINISTRADOR\n\n";
 	cout << "Digite o numero da opcao desejada:\n\
 	1 - Iniciar servico LogMeIn Hamachi\n\
@@ -30,4 +28,7 @@ int main()
         case 3:
             break;
 	}
-}
+
+Comandos
+========
+-
