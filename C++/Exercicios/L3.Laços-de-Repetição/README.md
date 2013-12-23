@@ -6,7 +6,7 @@ Este repositorio contem 20 exercicios resolvidos em C/C++ fazendo uso dos laços
 
 Laços de Repetição
 ==================
-1. Faça um programa que exiba 30 vezes na tela a mensagem "Não vou colcar na prova".
+1. Faça um programa que exiba 30 vezes na tela a mensagem "Não vou colar na prova".
 
 2. Faça um programa que exiba na tela a tabuada do numero 5 no seguinte formato 5x1=5; 5x2=10; ...; 5x10=50.
 
