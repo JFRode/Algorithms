@@ -9,7 +9,3 @@ Contendo opções de acesso direto ao site, forum e servidores da comunidade Cra
 
 O launcher foi desenvolvido por João Felipe Gonçalves & Fernando Concatto, para fins acadêmicos.
 
-
-PROJETO EM ANDAMENTO
-__________________________
-- Consertar sincronização com %APPDATA%

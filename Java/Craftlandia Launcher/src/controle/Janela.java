@@ -2,11 +2,14 @@ package controle;
 
 import java.awt.Color;
 import java.awt.Desktop;
+import java.awt.Dimension;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.IOException;
-import java.net.URISyntaxException;
 
 import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
@@ -17,7 +20,7 @@ import javax.swing.JPanel;
 
 public class Janela {
 	private JFrame frame = new JFrame("Craftlandia Launcher");
-	private JPanel painelBaixo = new JPanel();
+	private JPanel painelBaixo = new Gradiente();
 	private Imagem painelMeio = new Imagem("data/banner.jpg");
 	private JPanel painelTopo = new JPanel();
 	private JButton botaoJogar = new JButton("Jogar");
@@ -30,11 +33,11 @@ public class Janela {
 	public Janela() {
 		frame.getContentPane().setLayout(new BoxLayout(frame.getContentPane(), BoxLayout.Y_AXIS));//Organiza verticalmente
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		painelBaixo.setBorder(BorderFactory.createEmptyBorder(0, 200, 0, 5));
+		//painelBaixo.setBorder(BorderFactory.createEmptyBorder(0, 200, 0, 5));
 		painelBaixo.setBackground(Color.BLACK);
 		//botaoJogar.setBackground(Color.BLACK);
 		//botaoFechar.setBackground(Color.BLACK);
-		checkHG.setBackground(Color.BLACK);
+		checkHG.setOpaque(false);
 		checkHG.setForeground(Color.WHITE);
 		
 		frame.add(painelTopo);
@@ -45,23 +48,36 @@ public class Janela {
 		painelTopo.add(botaoServidores);
 		painelTopo.add(botaoForum);
 		
-		painelMeio.setBorder(BorderFactory.createEmptyBorder(1, 1, painelMeio.getAltura(), painelMeio.getLargura()));
+		painelMeio.setBorder(BorderFactory.createEmptyBorder(1, 1, painelMeio.getAltura()-5, painelMeio.getLargura()));
 		
-		painelBaixo.add(checkHG);
-		painelBaixo.add(botaoJogar);
-		painelBaixo.add(botaoFechar);
+		painelBaixo.setLayout(new GridBagLayout());
+		
+		GridBagConstraints lay = new GridBagConstraints();
+		lay.anchor = GridBagConstraints.WEST;
+		lay.weightx = 1;
+		lay.fill = GridBagConstraints.HORIZONTAL;
+		lay.insets = new Insets(2, 0, 4, 4);
+		
+		
+		painelBaixo.add(checkHG, lay);
+		lay.anchor = GridBagConstraints.EAST;
+		painelBaixo.add(botaoJogar, lay);
+		painelBaixo.add(botaoFechar, lay);
 		
 //<Funções dos botões>
 		botaoJogar.addActionListener(new ActionListener() {		//Inicia o jogo
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				String servidor = null;
+				servidor = (checkHG.isSelected()) ? "data\\dataHG" : "data";
+				
 				String home = System.getProperty("java.class.path");
 				home = home.substring(0, (home.lastIndexOf(File.separator) + 1));
 				home = home.concat("bin" + File.separator + "craftlandia.jar");
 
 				String caminho = System.getProperty("java.home") + File.separator + "bin" + File.separator + "java";
 				ProcessBuilder pb = new ProcessBuilder(caminho, "-jar", home);
-				pb.environment().put("APPDATA", "dataHG");
+				pb.environment().put("APPDATA", servidor);
 
 				try {
 					@SuppressWarnings("unused")
@@ -119,7 +135,11 @@ public class Janela {
 		
 		frame.setVisible(true);
 		frame.pack();
+		frame.setPreferredSize(new Dimension(frame.getWidth() - 10, frame.getHeight() - 10));
+		frame.setResizable(false);
+		frame.pack();
 		painelMeio.setLargura(frame.getContentPane().getWidth());
+		frame.requestFocusInWindow();
 		frame.setLocationRelativeTo(null);
 	}
 	

@@ -10,13 +10,11 @@ import javax.swing.JPanel;
 
 @SuppressWarnings("serial")
 public class Imagem extends JPanel {
-	private String caminho;
 	private int largura;
 	private boolean teste = true;
 	BufferedImage imagem = null;
 	
 	public Imagem(String caminho) {
-		this.caminho = caminho;
 		try {
 			imagem = ImageIO.read(new File(caminho));
 		} catch (IOException e) {
