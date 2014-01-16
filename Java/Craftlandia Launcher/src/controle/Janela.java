@@ -11,6 +11,7 @@ import java.net.URISyntaxException;
 import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
+import javax.swing.JCheckBox;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
@@ -24,14 +25,17 @@ public class Janela {
 	private JButton botaoServidores = new JButton("Servidores");
 	private JButton botaoForum = new JButton("Fórum");
 	private JButton botaoSite = new JButton("Site");
+	private JCheckBox checkHG = new JCheckBox("Hunger Games");
 	
 	public Janela() {
 		frame.getContentPane().setLayout(new BoxLayout(frame.getContentPane(), BoxLayout.Y_AXIS));//Organiza verticalmente
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		painelBaixo.setBorder(BorderFactory.createEmptyBorder(0, 200, 0, 5));
 		painelBaixo.setBackground(Color.BLACK);
-		botaoJogar.setBackground(Color.BLACK);
-		botaoFechar.setBackground(Color.BLACK);
+		//botaoJogar.setBackground(Color.BLACK);
+		//botaoFechar.setBackground(Color.BLACK);
+		checkHG.setBackground(Color.BLACK);
+		checkHG.setForeground(Color.WHITE);
 		
 		frame.add(painelTopo);
 		frame.add(painelMeio);
@@ -43,6 +47,7 @@ public class Janela {
 		
 		painelMeio.setBorder(BorderFactory.createEmptyBorder(1, 1, painelMeio.getAltura(), painelMeio.getLargura()));
 		
+		painelBaixo.add(checkHG);
 		painelBaixo.add(botaoJogar);
 		painelBaixo.add(botaoFechar);
 		
@@ -56,7 +61,7 @@ public class Janela {
 
 				String caminho = System.getProperty("java.home") + File.separator + "bin" + File.separator + "java";
 				ProcessBuilder pb = new ProcessBuilder(caminho, "-jar", home);
-				pb.environment().put("APPDATA", "%CD%\\data");
+				pb.environment().put("APPDATA", "dataHG");
 
 				try {
 					@SuppressWarnings("unused")
@@ -64,6 +69,7 @@ public class Janela {
 				} catch (IOException f) {
 					f.printStackTrace();
 				}
+				System.exit(0);
 			}
 		});
 		
@@ -115,7 +121,6 @@ public class Janela {
 		frame.pack();
 		painelMeio.setLargura(frame.getContentPane().getWidth());
 		frame.setLocationRelativeTo(null);
-		
 	}
 	
 }
