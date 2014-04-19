@@ -1,10 +1,14 @@
-###########################################################################################
-# - PROGRAMA 1
-# 
+# Disciplina: 4189 – Arquitetura e Organização de Computadores
+# Atividade: Avaliação 01 – Programação em Linguagem de Montagem
+# Programa 01
+# Grupo: - Guilherme Gustavo Gohr Darosci
+# 	 - João Felipe Gonçalves
+
+# ENUNCIADO
 # Implemente um programa que leia um vetor com 8 elementos via console, carregue todos os
 # elementos do vetor na memória e calcule a média aritmética entre esses 8 na tela.
-###########################################################################################
-# $s0 		Vetor A de 8 posições
+ 
+# $s0 		Recebe o endereco de Vetor A de 8 posições
 # $t0		Indice do laço. Também usado para fazer a multiplicação por byte
 # $t1		Recebe a multiplicação do indice * 4. Sendo utilizado para acessar a posição do vetor
 # $t2		Recebe os valores atribuidos do vetor A, e repassa para $t3
@@ -13,10 +17,9 @@
 	.data
 	
 msgLeitura:.asciiz	"LEITURA DOS ELEMENTOS DO VETOR:\n"
-msgSaida:.asciiz	"SAIDA DOS ELEMENTOS DO VETOR:\n"
 msgAritmetica:.asciiz	"\n\nA média dos elementos do vetor é igual a "
 
-msgA1:.asciiz	"A["
+msgA1:.asciiz	"Vetor_A["
 msgA2:.asciiz	"]: "
 	
 	
@@ -67,7 +70,7 @@ leitura:
 	
 acumula:
 
-	mul $t1, $t0, 4			# $t1 = indice * 4		($t0 é o indice deste laço)
+	mul $t1, $t0, 4			# $t1 = indice * 4		($t0 é o indice deste laco)
 	add $t1, $t1, $s0		# $t1 = $t1 + $s0
 	
 	lw $t2, 0($t1)			# $t2 = Memória[$t1 + 0]	A[0]
@@ -80,7 +83,7 @@ acumula:
 	
 	# Media Aritmética
 	
-	srl $t1, $t3, 3			# $t1 recebe $t3 deslocado para direita. 2 no expoente 3 é 8	(shift_right_logical)
+	sra $t1, $t3, 3			# $t1 recebe $t3 deslocado para direita. 2 no expoente 3 é 8	(shift_right_logical)
 	
 	###########################################################################################
 	

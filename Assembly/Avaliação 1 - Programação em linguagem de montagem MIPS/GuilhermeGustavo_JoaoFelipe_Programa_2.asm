@@ -1,10 +1,14 @@
-######################################################################################################
-# - PROGRAMA 2
-#
+# Disciplina: 4189 – Arquitetura e Organização de Computadores
+# Atividade: Avaliação 01 – Programação em Linguagem de Montagem
+# Programa 02
+# Grupo: - Guilherme Gustavo Gohr Darosci
+# 	 - João Felipe Gonçalves
+
+# ENUNCIADO
 # Implemente um programa que leia dois vetores via console e, após a leitura dos vetores, produza um
 # terceiro vetor em que cada elemento seja a média aritmética dos elementos de mesmo índice dos
 # outros dois vetores. Por fim, o programa deve imprimir esse novo vetor na tela.
-######################################################################################################
+
 # $s0		Vetor_A
 # $s1		Vetor_B
 # $s2		Vetor_C
@@ -54,7 +58,7 @@ tamanho:
 	
 	li $v0, 5			# Instrucao 5		(read_int)
 	syscall				# Chama o sistema
-	ble $v0, 0, invalido		# Se $v0 <= 0 entao chama a label invalido
+	ble $v0, 1, invalido		# Se $v0 <= 1 entao chama a label invalido
 	bgt $v0, 8, invalido		# Se $v0 > 8  entao chama a label invalido
 	
 	j continua			# Se passar pelos testes, pula para label continua
@@ -168,7 +172,7 @@ media:
 	lw $t2, 0($t2)			# $t2 = Memoria[$t2+0]
 	add $v0, $t1, $t2		# $v0 = $t1 + $t2		Soma os elementos do indice $t0 de Vetor_A e Vetor
 	
-	srl $v0, $v0, 1			# $v0 recebe $v0 deslocado para direita. 2 no expoente 1 é 2	(shift_right_logical)
+	sra $v0, $v0, 1			# $v0 recebe $v0 deslocado para direita. 2 no expoente 1 é 2	(shift_right_logical)
 	sw $v0, 0($t3)			# Memoria[$t3+0] = $v0
 	
 	# Imprimindo
