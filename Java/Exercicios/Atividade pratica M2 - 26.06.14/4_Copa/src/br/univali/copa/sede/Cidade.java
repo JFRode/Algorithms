@@ -13,9 +13,9 @@ package br.univali.copa.sede;
 public class Cidade {
     private String nome;
     private String estado;
-    private float IDH;
+    private String IDH;
 
-    public Cidade(String nome, String estado, float IDH) {
+    public Cidade(String nome, String estado, String IDH) {
         this.nome = nome;
         this.estado = estado;
         this.IDH = IDH;

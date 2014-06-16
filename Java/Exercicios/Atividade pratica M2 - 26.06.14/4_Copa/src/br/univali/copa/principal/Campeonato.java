@@ -7,19 +7,26 @@ import br.univali.copa.time.Jogador;
 import br.univali.copa.time.Tecnico;
 import br.univali.copa.time.Time;
 import br.univali.utilidades.Teclado;
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Date;
+import java.util.List;
 
 /**
  *
  * @author João Felipe Gonçalves
  */
 public class Campeonato {
-    private Time[] times = new Time[32];
-    private Cidade[] cidades = new Cidade[100];
-    private Estadio[] estadios = new Estadio[100];
+    public static final int QUANTIDADE_TIMES = 32;
+    private Collection colecao;
+    private List<Time> times = new ArrayList<Time>();
+    private List<Cidade> cidades = new ArrayList<Cidade>();
+    private List<Estadio> estadios = new ArrayList<Estadio>();
     private int indiceTimes = 0;
     private int indiceCidades = 0;
     private int indiceEstadios = 0;
+    private int indiceTitulos;
+    private int indiceRank;
 
     public Campeonato() {
         while (true){
@@ -28,14 +35,14 @@ public class Campeonato {
                     + "1 - Cadastrar Estadio\n"
                     + "2 - Cadastrar Times\n"
                     + "3 - Encerrar");
-            int r = Teclado.lerInteiro();
+            int r = Teclado.lerInteiro("");
             
             if (r == 1){
                 // Cadastra estadio
                 registrarEstadio();
             } else if (r == 2) {
                 // Cadastra time
-                for (int i = 0; i < times.length; i++){
+                for (int i = 0; i < QUANTIDADE_TIMES; i++){
                     registrarTime();
                 }
             } else if (r == 3){
@@ -48,17 +55,14 @@ public class Campeonato {
 
     
     public void registrarCidade(){
-        System.out.print("REGISTRO CIDADE/n"
-                + "Digite o nome da cidade: ");
-        String nome = Teclado.lerTexto();
+        System.out.println("REGISTRO CIDADE");
+        String nome = Teclado.lerTexto("Digite o nome da cidade: ");
         
-        System.out.print("Digite o estado: ");
-        String estado = Teclado.lerTexto();
+        String estado = Teclado.lerTexto("Digite o estado: ");
         
-        System.out.print("Digite o IDH: ");
-        String IDH = Teclado.lerTexto();
+        String IDH = Teclado.lerTexto("Digite o IDH: ");
         
-        cidades[indiceCidades] = new Cidade(nome, estado, indiceTimes);
+        cidades.add(new Cidade(nome, estado, IDH));
     }
     
     public void registrarEstadio(){
@@ -66,35 +70,29 @@ public class Campeonato {
         
         registrarCidade();
         
-        System.out.print("Nome do estadio:");
-        String nome = Teclado.lerTexto();
         
-        System.out.print("Data de fundação:");
-        Date data = Teclado.lerData();
+        String nome = Teclado.lerTexto("Nome do estadio:");
         
-        System.out.print("Capacidade ocupacional:");
-        int capacidade = Teclado.lerInteiro();
+        Date data = Teclado.lerData("Data de fundação:");
         
-        estadios[indiceEstadios] = new Estadio(cidades[indiceCidades], nome, data, capacidade);
+        int capacidade = Teclado.lerInteiro("Capacidade ocupacional:");
+        
+        estadios.add(new Estadio(cidades.get(indiceCidades), nome, data, capacidade));
         indiceCidades++;                                                        // Acrescenta indiceCidade pós registro, para capturar primeiro indice
     }
     
     public Tecnico registrarTecnico(){
-        System.out.print("Registro do tecnico\n"
-                + "Nome: ");
-        String nome = Teclado.lerTexto();
+        System.out.println("Registro do tecnico");
+        String nome = Teclado.lerTexto("Nome: ");
         
-        System.out.print("Escolaridade: ");
-        String escolaridade = Teclado.lerTexto();
+        String escolaridade = Teclado.lerTexto("Escolaridade: ");
         
-        System.out.print("Altura: ");
-        float altura = Teclado.lerNumero();
         
-        System.out.print("Peso: ");
-        float peso = Teclado.lerNumero();
+        float altura = Teclado.lerNumero("Altura: ");
         
-        System.out.print("Nacionalidade: ");
-        String nacionalidade = Teclado.lerTexto();
+        float peso = Teclado.lerNumero("Peso: ");
+        
+        String nacionalidade = Teclado.lerTexto("Nacionalidade: ");
         
         Tecnico tecnico = new Tecnico(nome, escolaridade, altura, peso, nacionalidade);
         return tecnico;
@@ -103,45 +101,42 @@ public class Campeonato {
     public void registrarTime(){
         System.out.println("REGISTRO DE TIME");
         
-        System.out.print("Pais:");
-        String pais = Teclado.lerTexto();
-        
         Tecnico tecnico = registrarTecnico();
         
+        String pais = Teclado.lerTexto("Pais:");
+        
+        
         // Registro jogadores
-        Jogador[] jogadores = new Jogador[Time.QUANTIDADE_JOGADORES];
+        List<Jogador> jogadores = new ArrayList<Jogador>();
+        
         System.out.println("REGISTRO DE JOGADORES");
-        for (int i = 0; i < jogadores.length; i++){
-            jogadores[i] = registrarJogador(i+1);
+        for (int i = 0; i < Time.QUANTIDADE_JOGADORES; i++){
+            jogadores.add(registrarJogador(i+1));
         }
         
-        times[indiceTimes] = new Time(tecnico, jogadores, pais, indiceTimes, indiceTimes);
+        indiceTitulos = Teclado.lerInteiro("Titulos:");
         
+        indiceRank = Teclado.lerInteiro("Posição no Rank:");
+        
+        times.add(new Time(tecnico, jogadores, pais, indiceTitulos, indiceRank));
     }
     
     public Jogador registrarJogador(int i){
             System.out.println("Jogador " + i);
             
-            System.out.print("Nome: ");
-            String nome = Teclado.lerTexto();
+            String nome = Teclado.lerTexto("Nome: ");
             
-            System.out.print("Escolaridade: ");
-            String escolaridade = Teclado.lerTexto();
+            String escolaridade = Teclado.lerTexto("Escolaridade: ");
             
-            System.out.print("Altura: ");
-            float altura = Teclado.lerNumero();
+            float altura = Teclado.lerNumero("Altura: ");
             
-            System.out.print("Peso: ");
-            float peso = Teclado.lerNumero();
+            float peso = Teclado.lerNumero("Peso: ");
             
-            System.out.print("Posição: ");
-            String posicao = Teclado.lerTexto();
+            String posicao = Teclado.lerTexto("Posição: ");
             
-            System.out.print("Lado de Preferencia (canhoto, destro, ambidestro): ");
-            String preferencia = Teclado.lerTexto();
+            String preferencia = Teclado.lerTexto("Lado de Preferencia (canhoto, destro, ambidestro): ");
             
             Jogador jogador = new Jogador(nome, escolaridade, altura, peso, posicao, preferencia);
             return jogador;
     }
-
 }

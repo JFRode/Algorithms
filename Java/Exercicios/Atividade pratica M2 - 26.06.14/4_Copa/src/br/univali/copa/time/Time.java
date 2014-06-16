@@ -1,6 +1,9 @@
 
 package br.univali.copa.time;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  *
  * @author João Felipe Gonçalves
@@ -8,12 +11,12 @@ package br.univali.copa.time;
 public class Time {
     public static final int QUANTIDADE_JOGADORES = 11;
     private Tecnico tecnico ;
-    private Jogador[] jogadores = new Jogador[QUANTIDADE_JOGADORES];
+    private List<Jogador> jogadores = new ArrayList<Jogador>();
     private String pais;
     private int numeroTitulos;
     private int posicaoRank;
 
-    public Time(Tecnico tecnico, Jogador[] jogadores, String pais, int titulos, int rank) {
+    public Time(Tecnico tecnico, List<Jogador> jogadores, String pais, int titulos, int rank) {
         this.tecnico = tecnico;
         this.jogadores = jogadores;
         this.pais = pais;
