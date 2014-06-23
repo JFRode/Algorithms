@@ -21,11 +21,7 @@ public class Conversor {
         return formato.format(data);
     }
     
-    public static Date paraData(String texto){
-        try {
-            return formato.parse(texto);
-        } catch (ParseException e) {
-            return null;
-        }
+    public static Date paraData(String texto) throws ParseException{
+        return formato.parse(texto);
     }
 }

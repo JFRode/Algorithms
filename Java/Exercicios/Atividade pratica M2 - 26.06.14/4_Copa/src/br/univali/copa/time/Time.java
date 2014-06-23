@@ -9,9 +9,8 @@ import java.util.List;
  * @author João Felipe Gonçalves
  */
 public class Time {
-    public static final int QUANTIDADE_JOGADORES = 11;
     private Tecnico tecnico ;
-    private List<Jogador> jogadores = new ArrayList<Jogador>();
+    private List<Jogador> jogadores;
     private String pais;
     private int numeroTitulos;
     private int posicaoRank;

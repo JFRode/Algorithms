@@ -18,9 +18,5 @@ public class Estadio {
         this.nomeEstadio = nome;
         this.fundacao = fundacao;
         this.capacidade = capacidade;
-    }
-
-    
-    
-    
+    } 
 }

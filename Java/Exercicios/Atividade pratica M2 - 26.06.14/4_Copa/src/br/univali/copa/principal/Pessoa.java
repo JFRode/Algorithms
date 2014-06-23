@@ -22,6 +22,4 @@ public class Pessoa {
         this.altura = altura ;
         this.peso = peso;
     }
-    
-    
 }

@@ -20,7 +20,4 @@ public class Cidade {
         this.estado = estado;
         this.IDH = IDH;
     }
-    
-    
-    
 }

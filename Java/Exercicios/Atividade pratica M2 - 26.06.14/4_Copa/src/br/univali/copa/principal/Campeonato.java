@@ -49,7 +49,6 @@ public class Campeonato {
                 // Encerra
                 break;
             } else System.out.println("Opção invalida!");
-            
         }
     }
 
@@ -109,9 +108,17 @@ public class Campeonato {
         // Registro jogadores
         List<Jogador> jogadores = new ArrayList<Jogador>();
         
-        System.out.println("REGISTRO DE JOGADORES");
-        for (int i = 0; i < Time.QUANTIDADE_JOGADORES; i++){
-            jogadores.add(registrarJogador(i+1));
+        System.out.println("REGISTRO DE JOGADORES\n"
+                + "(Digite 'parar' para encerrar a entrada de jogadores)");
+        
+        int i = 1;
+        Jogador jogador;
+        while (true){
+            jogador = registrarJogador(i);
+            if (jogador == null) break;
+            
+            jogadores.add(jogador);
+            i++;
         }
         
         indiceTitulos = Teclado.lerInteiro("Titulos:");
@@ -122,9 +129,12 @@ public class Campeonato {
     }
     
     public Jogador registrarJogador(int i){
-            System.out.println("Jogador " + i);
+            System.out.println("Jogador " + i + "\n"
+                    + "(Digite 'parar' para encerrar a entrada de jogadores)");
             
             String nome = Teclado.lerTexto("Nome: ");
+            
+            if (nome.equals("parar")) return null;
             
             String escolaridade = Teclado.lerTexto("Escolaridade: ");
             
