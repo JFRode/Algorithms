@@ -1,6 +1,8 @@
 
 package br.univali.copa.principal;
 
+import br.univali.copa.jogos.Campeonato;
+
 /**
  *
  * @author João Felipe Gonçalves
@@ -9,8 +11,9 @@ public class Principal {
 
     
     public static void main(String[] args) {
-        // TODO code application logic here
-        new Campeonato();
+        
+        Cadastro cadastro = new Cadastro();
+        new Campeonato(cadastro.getTimes());
     }
     
 }

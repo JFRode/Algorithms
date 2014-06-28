@@ -16,7 +16,7 @@ import java.util.List;
  *
  * @author João Felipe Gonçalves
  */
-public class Campeonato {
+public class Cadastro {
     public static final int QUANTIDADE_TIMES = 32;
     private Collection colecao;
     private List<Time> times = new ArrayList<Time>();
@@ -28,7 +28,7 @@ public class Campeonato {
     private int indiceTitulos;
     private int indiceRank;
 
-    public Campeonato() {
+    public Cadastro() {
         while (true){
             // Menu
             System.out.println("MENU\n"
@@ -69,7 +69,6 @@ public class Campeonato {
         
         registrarCidade();
         
-        
         String nome = Teclado.lerTexto("Nome do estadio:");
         
         Date data = Teclado.lerData("Data de fundação:");
@@ -86,7 +85,6 @@ public class Campeonato {
         
         String escolaridade = Teclado.lerTexto("Escolaridade: ");
         
-        
         float altura = Teclado.lerNumero("Altura: ");
         
         float peso = Teclado.lerNumero("Peso: ");
@@ -100,32 +98,45 @@ public class Campeonato {
     public void registrarTime(){
         System.out.println("REGISTRO DE TIME");
         
-        Tecnico tecnico = registrarTecnico();
+       // Tecnico tecnico = registrarTecnico();
+
+        String pais = null;
+        boolean existe;                                       // Retorna true se tiver algum elemento
+        do {            
+            existe = true;
+            pais = Teclado.lerTexto("Pais:");
+            for (Time time : times) {
+                if (pais.equalsIgnoreCase(time.getPais())) {
+                    existe = false;
+                    System.out.println("Pais digitado ja existe!");
+                    break;
+                } 
+            }
+        } while (!existe);
         
-        String pais = Teclado.lerTexto("Pais:");
+        //Registro jogadores
+//        List<Jogador> jogadores = new ArrayList<Jogador>();
+//        
+//        System.out.println("REGISTRO DE JOGADORES\n"
+//                + "(Digite 'parar' para encerrar a entrada de jogadores)");
+//        
+//        int i = 1;
+//        Jogador jogador;
+//        while (true){
+//            jogador = registrarJogador(i);
+//            if (jogador == null) break;
+//            
+//            jogadores.add(jogador);
+//            i++;
+//        }
+//        
+//        indiceTitulos = Teclado.lerInteiro("Titulos:");
+//        
+//        indiceRank = Teclado.lerInteiro("Posição no Rank:");
+//        
+//        times.add(new Time(tecnico, jogadores, pais, indiceTitulos, indiceRank));
+        times.add(new Time(null, null, pais, indiceTitulos, indiceRank));
         
-        
-        // Registro jogadores
-        List<Jogador> jogadores = new ArrayList<Jogador>();
-        
-        System.out.println("REGISTRO DE JOGADORES\n"
-                + "(Digite 'parar' para encerrar a entrada de jogadores)");
-        
-        int i = 1;
-        Jogador jogador;
-        while (true){
-            jogador = registrarJogador(i);
-            if (jogador == null) break;
-            
-            jogadores.add(jogador);
-            i++;
-        }
-        
-        indiceTitulos = Teclado.lerInteiro("Titulos:");
-        
-        indiceRank = Teclado.lerInteiro("Posição no Rank:");
-        
-        times.add(new Time(tecnico, jogadores, pais, indiceTitulos, indiceRank));
     }
     
     public Jogador registrarJogador(int i){
@@ -149,4 +160,11 @@ public class Campeonato {
             Jogador jogador = new Jogador(nome, escolaridade, altura, peso, posicao, preferencia);
             return jogador;
     }
+
+    public List<Time> getTimes() {
+        return times;
+    }
+    
+    
+    
 }

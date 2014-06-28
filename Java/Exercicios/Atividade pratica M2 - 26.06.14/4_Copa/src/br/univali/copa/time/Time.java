@@ -22,6 +22,12 @@ public class Time {
         this.numeroTitulos = titulos;
         this.posicaoRank = rank;
     }
+
+    public String getPais() {
+        return pais;
+    }
+    
+    
     
     
 }
