@@ -22,4 +22,4 @@ O projeto consiste no desenvolvimento de uma aplicação em Java que permita vis
 
 *Iniciado em 02/09/2014*
 
-*Status: em desenvolvimento*
+*Status: CONCLUIDO*

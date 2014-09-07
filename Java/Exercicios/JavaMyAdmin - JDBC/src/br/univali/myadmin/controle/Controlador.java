@@ -21,12 +21,11 @@ public class Controlador {
     private DatabaseMetaData dbMeta = conexao.getMetaData();
     private Statement state = conexao.createStatement();
     
-    private ResultSet rsCatalogs = dbMeta.getCatalogs();
     private ResultSet rsTable;
     private ResultSet rs;
     
     private List lista = new ArrayList();
-    private BancoDeDados banco = new BancoDeDados();;
+    private BancoDeDados banco = new BancoDeDados();
     private Visao visao = new VisaoConsole();
     
     private String baseDeDados;
@@ -35,22 +34,26 @@ public class Controlador {
     
     public Controlador() throws Exception {
         
-        lista = banco.getResult(rsCatalogs, "TABLE_CAT");
-        visao.exibirList(lista, "BANCOS DISPONIVEIS:");
-        baseDeDados = visao.leitura("Digite o nome do banco que deseja acessar:");
+        boolean persistencia = true;
         
-        rsTable = dbMeta.getTables(baseDeDados, null, null, null);
-        lista = banco.getResult(rsTable, "TABLE_NAME");
-        visao.exibirList(lista, "TABELAS DISPONIVEIS:");
-        
-        tabela = visao.leitura("Digite o nome da tabela que deseja acessar:");
-        
-        
-        rs = state.executeQuery("SELECT * FROM " + baseDeDados + "." + tabela);
-        
-        ASCIITable.getInstance().printTable(banco.tabela(rs), banco.matriz(rs));
+        while (persistencia){
+            
+            lista = banco.getResult(conexao.getMetaData().getCatalogs(), "TABLE_CAT");
+            visao.exibirList(lista, "BANCOS DISPONIVEIS:");
+            baseDeDados = visao.leitura("Digite o nome do banco que deseja acessar:");
+
+            rsTable = dbMeta.getTables(baseDeDados, null, null, null);
+            lista = banco.getResult(rsTable, "TABLE_NAME");
+            visao.exibirList(lista, "TABELAS DISPONIVEIS:");
+
+            tabela = visao.leitura("Digite o nome da tabela que deseja acessar:");
+
+            rs = state.executeQuery("SELECT * FROM " + baseDeDados + "." + tabela); // Comando SQL
+
+            ASCIITable.getInstance().printTable(banco.tabela(rs), banco.matriz(rs));
+            
+            persistencia = visao.persistencia();
+        }
     }
-    
-    
     
 }

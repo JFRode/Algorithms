@@ -1,7 +1,6 @@
 
 package br.univali.myadmin.visao;
 
-import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
 
@@ -21,6 +20,22 @@ public class VisaoConsole implements Visao{
         
         for (Object l : lista) {
             System.out.println(l);
+        }
+    }
+    
+    public boolean persistencia(){
+        
+        while (true){
+            String opcao = leitura("Digite 0 para sair ou 1 para continuar");
+            switch(opcao){
+                case "0":
+                    return false;
+                case "1":
+                    return true;
+                default:
+                    exibir("Opção digitada INVALIDA!");
+                    break;
+            }
         }
     }
 }
