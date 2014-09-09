@@ -23,10 +23,10 @@ public class VisaoConsole implements Visao{
         }
     }
     
-    public boolean persistencia(){
+    public boolean persistencia(String texto){
         
         while (true){
-            String opcao = leitura("Digite 0 para sair ou 1 para continuar");
+            String opcao = leitura(texto);
             switch(opcao){
                 case "0":
                     return false;
